@@ -45,7 +45,7 @@
 // //QUERY SELECTOR ALL
 // // works similar to the selectbytagname or classname
 // //here also in the arg we can put anything
-// // this gives us a nodelist which is similar to the collection except we can run aa methods on nodelist
+// // this gives us a nodelist which is similar to the collection except we can run aaray methods on nodelist
 // let q = document.querySelectorAll('.title');
 // console.log(q);
 // q[0].textContent = 'not today';
