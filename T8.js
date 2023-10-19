@@ -8,7 +8,7 @@ var itemlist = document.getElementById('items');
 form.addEventListener('submit', addItem);
 
 //delete event 
-form.addEventListener('click', removeItem);
+itemlist.addEventListener('click', removeItem);
 
 //add item function 
 function addItem(e){
@@ -30,7 +30,7 @@ function addItem(e){
     var delbutton = document.createElement('button');
 
     //add classname to the delbutton var
-    delbutton.className = 'btn btn-danger btn-sm float-right delete';
+    delbutton.className = "btn btn-danger btn-sm float-right delete";
 
     //append text node in the new button 
     delbutton.appendChild(document.createTextNode('X'));
