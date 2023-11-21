@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JS For Beginners</title>
+    <link rel="stylesheet" href="domT10.css">
+  </head>
+  <body>
+    <header>
+      <h1>Book Now</h1>
+    </header>
+
+    <section class="container">
+      <form onsubmit="saveInLocalStorage(event)">
+        <label>Name</label>
+        <input type="text" name="username" required/><br>
+        <label>EmailId</label>
+        <input type="email" name="emailId" required/><br>
+        <label>Phone Number</label>
+        <input type="tel" name="phonenumber" /><br>
+        <button> Submit </button>
+        
+      </form>
+
+      <ul id="listOfUsers"></ul>
+    </section>
+    
+
+    <script src="dom13.js">
+
+    </script>
+        
+  </body>
+</html>
