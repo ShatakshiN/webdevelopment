@@ -43,7 +43,7 @@ function showUsersOnScreen(obj){
         parentElem.removeChild(childElem);
         document.getElementById('amountInputTag').value = obj.amount;
         document.getElementById('descriptionInputTag').value = obj.description;
-        document.getElementById('categoryInputTag').value = obj.category; 
+        document.getElementById('categoryTag').value = obj.category; 
     }
 
     parentElem.appendChild(childElem)
