@@ -21,15 +21,15 @@
             <form onsubmit="saveToLocalStorage(event)">
                   <div class="mb-3 pt-5">
                     <label  class="form-label text-center text-bg-dark">Amount</label>
-                    <input type="number" class="form-control"  name="amount" required/>
+                    <input type="number" class="form-control"  name="amount"  id="amountInputTag" required/>
                   </div>
                   <div class="mb-3">
                     <label  class="form-label text-center text-bg-dark" >Description</label>
-                    <input type="text" class="form-control" name="description" placeholder="add description" required/>
+                    <input type="text" class="form-control" name="description" placeholder="add description" id='descriptionInputTag' required/>
                   </div>
                   <div class="mb-3">
                     <label class="form-label text-bg-dark">Category</label>
-                    <select name="category" class="form-select">
+                    <select name="category" class="form-select" id="categoryTag">
                       <option selected class="form-select">Choose a Category</option>
                       <option> Housing or Rent</option>
                       <option>food and groceries</option>
