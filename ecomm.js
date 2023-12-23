@@ -7,6 +7,7 @@ function saveToCloudStorage(event) {
     // Update the total amount
     totalAmountValue += amount;
 
+
     // Create a new heading element to display the total amount
     updateTotalAmountOnScreen();
 
@@ -17,7 +18,7 @@ function saveToCloudStorage(event) {
         product
     };
 
-    axios.post('https://crudcrud.com/api/3d27df8efd87435fa2d792dd77ec588e/data', obj)
+    axios.post('https://crudcrud.com/api/7e5bae44b2d34b549cd0f4898f08f504/data', obj)
         .then((response) => {
             showUsersOnScreen(response.data);
             console.log(response);
@@ -28,23 +29,26 @@ function saveToCloudStorage(event) {
 }
 
 function updateTotalAmountOnScreen() {
-    // Get or create the total amount heading element
     let totalAmountElem = document.getElementById('totalAmount');
-    if (!totalAmountElem) {
+    if (!totalAmountElem){
         totalAmountElem = document.createElement('h2');
-        totalAmountElem.id = 'totalAmount';
-        document.body.appendChild(totalAmountElem);
+    totalAmountElem.id = 'totalAmount';
+    document.body.appendChild(totalAmountElem);
     }
+    // Get or create the total amount heading element
+    
 
     // Update the content of the total amount heading
     totalAmountElem.textContent = `Total Amount: ${totalAmountValue}`;
+
 }
 
 function deleteFromCloudStorage(id, childElem) {
-    axios.delete(`https://crudcrud.com/api/3d27df8efd87435fa2d792dd77ec588e/data/${id}`)
+    axios.delete(`https://crudcrud.com/api/7e5bae44b2d34b549cd0f4898f08f504/data/${id}`)
         .then(() => {
             const parentElem = document.getElementById('listOfUsers');
             parentElem.removeChild(childElem);
+            
         })
         .catch((err) => {
             console.log(err);
@@ -62,15 +66,26 @@ function showUsersOnScreen(obj) {
     childElem.appendChild(delButton);
 
     delButton.onclick = () => {
-        // Call the delete function passing the user's id and the list item element
-        deleteFromCloudStorage(obj._id, childElem);
+        // Assuming each entry has an 'amount' property representing the amount entered
+    const amountToDelete = obj.amount;
+
+    // Call the delete function passing the user's id and the list item element
+    deleteFromCloudStorage(obj._id, childElem);
+
+    // Subtract the amount of the deleted entry from the total amount
+    totalAmountValue -= amountToDelete;
+
+    // Update the total amount on the screen
+    updateTotalAmountOnScreen();
+
+        
     };
 
     parentElem.appendChild(childElem);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/3d27df8efd87435fa2d792dd77ec588e/data")
+    axios.get("https://crudcrud.com/api/7e5bae44b2d34b549cd0f4898f08f504/data")
         .then((response) => {
             console.log(response);
 
