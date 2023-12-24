@@ -18,7 +18,7 @@ function saveToCloudStorage(event) {
         product
     };
 
-    axios.post('https://crudcrud.com/api/7e5bae44b2d34b549cd0f4898f08f504/data', obj)
+    axios.post('https://crudcrud.com/api/bdba2f90091b411fb556e61560e91acc/data', obj)
         .then((response) => {
             showUsersOnScreen(response.data);
             console.log(response);
@@ -33,18 +33,17 @@ function updateTotalAmountOnScreen() {
     if (!totalAmountElem){
         totalAmountElem = document.createElement('h2');
     totalAmountElem.id = 'totalAmount';
+    totalAmountElem.style.backgroundColor = 'white';
+    totalAmountElem.className = 'text-center container col-4' 
     document.body.appendChild(totalAmountElem);
-    }
-    // Get or create the total amount heading element
-    
-
+    } 
     // Update the content of the total amount heading
     totalAmountElem.textContent = `Total Amount: ${totalAmountValue}`;
 
 }
 
 function deleteFromCloudStorage(id, childElem) {
-    axios.delete(`https://crudcrud.com/api/7e5bae44b2d34b549cd0f4898f08f504/data/${id}`)
+    axios.delete(`https://crudcrud.com/api/bdba2f90091b411fb556e61560e91acc/data/${id}`)
         .then(() => {
             const parentElem = document.getElementById('listOfUsers');
             parentElem.removeChild(childElem);
@@ -81,11 +80,32 @@ function showUsersOnScreen(obj) {
         
     };
 
+    const editButton = document.createElement('button');
+    const editText = document.createTextNode('Edit');
+    editButton.appendChild(editText);
+    childElem.appendChild(editButton);
+
+    editButton.onclick = () =>{
+
+        const toDelete = obj.amount;
+
+
+        deleteFromCloudStorage(obj._id, childElem);
+
+        totalAmountValue -= toDelete;
+
+        updateTotalAmountOnScreen()
+
+        document.getElementById('amountTag').value = obj.amount;
+        document.getElementById('product').value = obj.product;
+         
+    }
+
     parentElem.appendChild(childElem);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/7e5bae44b2d34b549cd0f4898f08f504/data")
+    axios.get("https://crudcrud.com/api/bdba2f90091b411fb556e61560e91acc/data")
         .then((response) => {
             console.log(response);
 
