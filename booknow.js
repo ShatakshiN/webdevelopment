@@ -1,18 +1,16 @@
-let totalAmountValue = 0; // Global variable to store the total amount
+let totalRooms= 0; // Global variable to store the total amount
 
 function saveToCloudStorageForHotel(event) {
     event.preventDefault();
-    const room = parseFloat(event.target.noOfRooms.value); // Parse amount as a float
-
-    // Update the total amount
-    totalAmountValue += room;
-
-
-    // Create a new heading element to display the total amount
-    updateTotalAmountOnScreen();
-
+    const room = parseInt(event.target.noOfRooms.value); // Parse amount as Int
     const name = event.target.customerName.value;
     const contact = event.target.contactNum.value;
+
+    // Update the total rooms
+    totalRooms += room;
+
+    // Create a new heading element to display the total amount
+    updateTotalRoomOnScreen();
 
     const obj = {
         room,
@@ -20,32 +18,32 @@ function saveToCloudStorageForHotel(event) {
         contact
     };
 
-    axios.post('https://crudcrud.com/api/2a042c18109346ba871f4e7e1d285ff8/data', obj)
+    axios.post('https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data', obj)
         .then((response) => {
-            showUsersOnScreen(response.data);
-            console.log(response);
+            showUsersOnScreen(response.data); // shows the entries on the screen
+            console.log(response); // just for checking purposes (in the inspect console)
         })
         .catch((err) => {
             console.log(err);
         });
 }
 
-function updateTotalAmountOnScreen() {
+function updateTotalRoomOnScreen() {
     let totalRoomElem = document.getElementById('totalRooms');
-    if (!totalRoomElem){
-        totalRoomElem = document.createElement('h2');
+    if (!totalRoomElem){ 
+        totalRoomElem = document.createElement('h4');
         totalRoomElem.id = 'totalRooms';
         totalRoomElem.style.backgroundColor = 'white';
         totalRoomElem.className = 'text-center me-5 container col-4 opacity-75' ;
         document.body.appendChild(totalRoomElem);
     } 
-    // Update the content of the total amount heading
-    totalRoomElem.textContent = `Total Rooms Occupied: ${totalAmountValue}`;
+    // Update the content of the total room heading
+    totalRoomElem.textContent = `Total Rooms Occupied: ${totalRooms}`;
 
 }
 
 function deleteFromCloudStorage(id, childElem) {
-    axios.delete(`https://crudcrud.com/api/2a042c18109346ba871f4e7e1d285ff8/data/${id}`)
+    axios.delete(`https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data/${id}`)
         .then(() => {
             const parentElem = document.getElementById('listOfUsers');
             parentElem.removeChild(childElem);
@@ -64,20 +62,20 @@ function showUsersOnScreen(obj) {
     const delButton = document.createElement('button');
     const delText = document.createTextNode('Delete');
     delButton.appendChild(delText);
-    childElem.appendChild(delButton);
+    childElem.appendChild(delButton); // so that each entry has a delete button
 
     delButton.onclick = () => {
-        // Assuming each entry has an 'amount' property representing the amount entered
+        //  each entry has  'room' property representing the no of rooms entered
     const roomToDelete = obj.room;
 
     // Call the delete function passing the user's id and the list item element
     deleteFromCloudStorage(obj._id, childElem);
 
     // Subtract the amount of the deleted entry from the total amount
-    totalAmountValue -= roomToDelete;
+    totalRooms -= roomToDelete;
 
     // Update the total amount on the screen
-    updateTotalAmountOnScreen();
+    updateTotalRoomOnScreen();
 
         
     };
@@ -94,9 +92,9 @@ function showUsersOnScreen(obj) {
 
         deleteFromCloudStorage(obj._id, childElem);
 
-        totalAmountValue -= toDelete;
+        totalRooms -= toDelete;
 
-        updateTotalAmountOnScreen()
+        updateTotalRoomOnScreen()
 
         document.getElementById('fullNameTag').value = obj.name;
         document.getElementById('phoneNumTag').value = obj.contact;
@@ -108,18 +106,18 @@ function showUsersOnScreen(obj) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/2a042c18109346ba871f4e7e1d285ff8/data")
+    axios.get("https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data")
         .then((response) => {
             console.log(response);
 
             for (let i = 0; i < response.data.length; i++) {
                 showUsersOnScreen(response.data[i]);
-                // Update the total amount for existing data
-                totalAmountValue += response.data[i].room;
+                // Update the total room for existing data
+                totalRooms += response.data[i].room;
             }
 
-            // Display the initial total amount
-            updateTotalAmountOnScreen();
+            // Display the initial total room
+            updateTotalRoomOnScreen();
         })
         .catch((err) => {
             console.log(err);
