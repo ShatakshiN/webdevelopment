@@ -1,4 +1,4 @@
-let totalRooms= 0; // Global variable to store the total amount
+let totalRooms= 0; // Global variable to store the total rooms
 
 function saveToCloudStorageForHotel(event) {
     event.preventDefault();
@@ -20,7 +20,7 @@ function saveToCloudStorageForHotel(event) {
 
     axios.post('https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data', obj)
         .then((response) => {
-            showUsersOnScreen(response.data); // shows the entries on the screen
+            showUsersOnScreen(response.data); // shows the entries on the screen data is present response that we are getting back 
             console.log(response); // just for checking purposes (in the inspect console)
         })
         .catch((err) => {
@@ -96,6 +96,7 @@ function showUsersOnScreen(obj) {
 
         updateTotalRoomOnScreen()
 
+        //populating the input fields of html elements
         document.getElementById('fullNameTag').value = obj.name;
         document.getElementById('phoneNumTag').value = obj.contact;
         document.getElementById('roomTag').value = obj.room;
