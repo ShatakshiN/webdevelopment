@@ -18,7 +18,7 @@ function saveToCloudStorageForHotel(event) {
         contact
     };
 
-    axios.post('https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data', obj)
+    axios.post('https://crudcrud.com/api/5837b8ee20854e49907f3647b9a7bac1/data', obj)
         .then((response) => {
             showUsersOnScreen(response.data); // shows the entries on the screen data is present response that we are getting back 
             console.log(response); // just for checking purposes (in the inspect console)
@@ -43,7 +43,7 @@ function updateTotalRoomOnScreen() {
 }
 
 function deleteFromCloudStorage(id, childElem) {
-    axios.delete(`https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data/${id}`)
+    axios.delete(`https://crudcrud.com/api/5837b8ee20854e49907f3647b9a7bac1/data/${id}`)
         .then(() => {
             const parentElem = document.getElementById('listOfUsers');
             parentElem.removeChild(childElem);
@@ -107,7 +107,7 @@ function showUsersOnScreen(obj) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/3e7d5b0aadc24adbbc4a034fc103deed/data")
+    axios.get("https://crudcrud.com/api/5837b8ee20854e49907f3647b9a7bac1/data")
         .then((response) => {
             console.log(response);
 
