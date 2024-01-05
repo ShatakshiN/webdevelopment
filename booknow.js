@@ -1,6 +1,6 @@
 let totalRooms= 0; // Global variable to store the total rooms
 
-function saveToCloudStorageForHotel(event) {
+ function saveToCloudStorageForHotel(event) {
     event.preventDefault();
     const room = parseInt(event.target.noOfRooms.value); // Parse amount as Int
     const name = event.target.customerName.value;
@@ -26,6 +26,7 @@ function saveToCloudStorageForHotel(event) {
         .catch((err) => {
             console.log(err);
         });
+
 }
 
 function updateTotalRoomOnScreen() {
