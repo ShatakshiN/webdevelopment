@@ -1,8 +1,4 @@
-console.
-
 let totalRooms = 0; // Global variable to store the total rooms
-
-
 
 async function saveToCloudStorageForHotel(event) {
     event.preventDefault();
