@@ -1,12 +1,12 @@
-const http = require('http');  // exporting the http module of node.js
+/* const http = require('http');  // exporting the http module of node.js
 
 const server = http.createServer((req,res)=>{ 
     res.end('Shatakshi Nimare') // shatakshi Nimare will be visible on the page . 
     console.log(req); // visible to us on the terminal- shows all the things present in the req like header, http method etc
     //process.exit(); // forcefully terminates the server. 
-});
+}); */
 
-server.listen(4000); // the server will run on 4000 port number ie will be listen at that particular port
+//server.listen(4000); // the server will run on 4000 port number ie will be listen at that particular port
 
 //____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
