@@ -1,6 +1,6 @@
 const http = require('http');
 const fs = require('fs');
-const { buffer } = require('stream/consumers');
+
 
 const server = http.createServer((req,res)=>{
     const url = req.url; // to check which url we currently have
@@ -20,19 +20,19 @@ const server = http.createServer((req,res)=>{
             body.push(chunk);
         })
 
-        req.on('end', ()=>{
+        return req.on('end', ()=>{
             const parsedBody = Buffer.concat(body).toString();
             console.log(parsedBody);
             const msg = parsedBody.split('=')[1]
             console.log(msg);
             //fs.writeFileSync('message.txt', msg);  not to use because it will block the code execution because it will only resume once message.txt file is created and the message is stored in it. until then no further execution will happen. 
-            fs.write('message.txt',msg, (err)=>{ // always use fs.write since we can also give a callback function for error handling and it will not block further code execution. for now we are not doing error handling we are simply giving the response.
+            fs.writeFile('message.txt',msg, err => { // always use fs.write since we can also give a callback function for error handling and it will not block further code execution. for now we are not doing error handling we are simply giving the response.
                 res.statusCode = 302;
                 res.setHeader('Location', '/');
                 return res.end();
             });           
         });
-    };
+    }
 
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
